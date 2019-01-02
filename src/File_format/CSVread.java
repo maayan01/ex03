@@ -60,7 +60,6 @@ public class CSVread
 				}
 			}
 		}
-		
 		return csvLayer;
 	}
 }

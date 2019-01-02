@@ -4,6 +4,7 @@
 
 package GIS;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,12 +17,14 @@ public class My_Meta_data  implements Meta_data
 	private	double rssi; 
 	private long UTC;//time
 	private String p_color;
+	private String date;
 
 	//------------------constructor---------------------------
 	public My_Meta_data(String[] userData )
 	{
 		name_SSID = userData[1];
 		UTC = DateToUTC(userData[3]);
+		date = userData[3];
 		rssi = Double.parseDouble(userData[5]);
 		p_color = ChooseColor(userData ,rssi);
 	}
@@ -35,31 +38,33 @@ public class My_Meta_data  implements Meta_data
 	}
 	//---------------------Help methods-----------------------
 	/** convert from Date form to UTC*/
-	private long DateToUTC(String myDate)
+	private long DateToUTC(String dateStr)
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		long millis;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date= new Date();
 		try 
 		{
-			date = sdf.parse(myDate);
+			date = sdf.parse(dateStr);
 		} 
 		catch (ParseException e) 
 		{
 			e.printStackTrace();
 		}
-		long millis = date.getTime();
+		millis = date.getTime();
 		return millis;
 	}
+	//--------------------------------------------------------------
 	/** choose the color of the point according to RSSI value*/
 	private String ChooseColor (String[] userData ,double rssi)
 	{
 		if(rssi < -90)
 		{
-			return "Green";
+			return "#green";
 		}
 		else
 		{
-			return "Red";
+			return "#red";
 		}
 	}
 	//-----------------------------------------------------
@@ -84,23 +89,10 @@ public class My_Meta_data  implements Meta_data
 	{
 		return rssi;
 	}
-	//-----------------------Set's methods------------------------------
-/*	public void setUTC(long UTC) 
+	public String getDate()
 	{
-		this.UTC = UTC;
+		return this.date;
 	}
-	public void setColor(String p_color) 
-	{
-		this.p_color=p_color;
-	}
-	public void setName(String name_SSID )
-	{
-		this.name_SSID =name_SSID;
-	}
-	public void setRssi(double rssi)
-	{
-		this.rssi = rssi;
-	}*/
 	//------------------toString---------------------------
 	/** return a String representing this data */
 	public String toString()

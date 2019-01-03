@@ -73,7 +73,6 @@ public class CSVread
 		String line = "";
 		String cvsSplitBy = ",";
 		Game csvGame = new Game();
-		//GIS_layer csvLayer= new My_GIS_layer();
 		int i=0;
 
 		try 
@@ -82,7 +81,6 @@ public class CSVread
 			GIS_project files= new My_GIS_project(); 
 			while ((line = br.readLine()) != null) 
 			{
-				System.out.println("line:"+i+" in the while loop ");
 				//The data start from the second line;
 				if(i>0) 
 				{
@@ -90,20 +88,16 @@ public class CSVread
 					//packman data
 					if(gameData[0].equals("P"))
 					{
-						System.out.println("packman read");
 						csvGame.add_p(new Packman(gameData) );
 					}
 					//fruit data
 					else if(gameData[0].equals("F"))
 					{
-						System.out.println("fruit read");
 						csvGame.add_f(new Fruit (gameData));
 					}
-				//	csvLayer.add(new My_GIS_element(gameData));
 				}
 				i++;
 			}
-		//	files.add(csvLayer);
 		} 
 		catch (IOException e) 
 		{
@@ -124,7 +118,6 @@ public class CSVread
 				}
 			}
 		}
-		//return csvLayer;
 		return csvGame;
 	}
 }

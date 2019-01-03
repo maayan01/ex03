@@ -103,7 +103,6 @@ public class CSVread
 		{
 			e.printStackTrace();
 		}
-
 		finally 
 		{
 			if (br != null) 

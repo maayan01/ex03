@@ -1,11 +1,18 @@
 package GameTools;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import File_format.CSVread;
+import GIS.GIS_element;
+import GIS.My_GIS_element;
+import Geom.Point3D;
 
 public class Game
 {
@@ -23,6 +30,79 @@ public class Game
 	{
 		Game myGame;
 		myGame = CSVread.CSVreaderGame(path_file) ;
+	}
+	
+	
+   //-------------------------------------------------
+	/**
+	 * make a new csv file
+	 * @param fileName
+	 * */
+	private File newCsvFile(String fileName)
+	{
+	    String folderName="D:\\Users\\eli\\Documents\\ArielJAVAProjects\\Ex3\\new_csv\\";
+		File file = new File( folderName+fileName+".csv");
+		// creates the file
+		try 
+		{
+			file.createNewFile();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return file;
+	}
+	//------------------------------------------
+	/**
+	 * save the game data to csv file
+	 * @param fileName
+	 * */
+	private void saveGame2csv (String fileName)
+	{
+
+		String gameData="";
+		File file = newCsvFile(fileName);
+		gameData= StringGameCSV ();
+		try
+		{
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(gameData);
+		//	wellDone(file);
+			bw.close();
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Failed to create kml file ");
+			e.printStackTrace();
+		}
+	}
+	
+	//-------------------------------------------
+	/**make form game data String in form of csv 
+	 * */
+	public String StringGameCSV ()
+	{
+		String firstline,fruitData="" , packmanData="" ,csvGame="";
+		firstline="Type,id,Lat,Lon,Alt,Speed/Weight,Radius\n";
+		int i_fruit=0 , i_packman=0;
+		
+		//packman data
+				for (Packman packman : setPackmans) 
+				{
+					packmanData=packmanData+"P,"+i_packman+","+packman.get_packmanPoint()+","+packman.get_speed_P()+","+packman.get_radius_P()+"\n";
+					i_packman++;
+				}
+		//fruit data
+		for (Fruit fruit : setFruits) 
+		{
+			fruitData=fruitData+"F,"+i_fruit+","+fruit.get_fruitPoint()+",\n";
+			i_fruit++;
+		}
+		csvGame= firstline+packmanData+fruitData;
+		return csvGame;
 	}
 	
 	//--------------set methods Fruit------------------------

@@ -59,7 +59,7 @@ public class Game
 	 * save the game data to csv file
 	 * @param fileName
 	 * */
-	private void saveGame2csv (String fileName)
+	public void saveGame2csv (String fileName)
 	{
 
 		String gameData="";

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import File_format.CSVread;
+
 public class Game
 {
 	//------------------fields-----------------------------
@@ -17,13 +19,12 @@ public class Game
 		setFruits = new HashSet<Fruit>();
 		setPackmans = new HashSet<Packman>();
 	}
-	//------------------------------------------------------
-
-	public static void Csv2Game ()
+	public Game (String path_file )
 	{
-
+		Game myGame;
+		myGame = CSVread.CSVreaderGame(path_file) ;
 	}
-
+	
 	//--------------set methods Fruit------------------------
 	public boolean add_f(Fruit arg0) 
 	{

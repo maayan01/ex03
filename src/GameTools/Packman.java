@@ -2,7 +2,6 @@ package GameTools;
 
 import java.util.Collection;
 import java.util.Iterator;
-
 import GIS.GIS_element;
 import Geom.Point3D;
 
@@ -30,7 +29,20 @@ public class Packman
 		speed =Double.parseDouble(gameData[5]);
 		radius = Double.parseDouble(gameData[6]);
 	}
-
+	
+	//-----------------------Get's methods-----------------------------------
+	public Point3D get_packmanPoint()
+	{
+		return p;
+	}
+	public double get_speed_P()
+	{
+		return speed;
+	}
+	public double get_radius_P()
+	{
+		return radius;
+	}
 	//---------------------------toString----------------------------------------
 	public String toString()
 	{
